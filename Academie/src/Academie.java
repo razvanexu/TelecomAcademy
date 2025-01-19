@@ -13,7 +13,11 @@ public class Academie {
 
     public static synchronized Academie getInstance(){
         if (instance == null){
-            return new Academie();
+            synchronized (Academie.class){
+                if(instance == null){
+                    instance = new Academie();
+                }
+            }
         }
         return instance;
     }
