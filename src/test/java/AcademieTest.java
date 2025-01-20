@@ -1,11 +1,15 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AcademieTest {
 
     @Test
-    public void testSingletonInstance() {
+    @DisplayName("Test if singleton generates a single instance on all threads")
+    public void singletonInstanceThreadSafeTest() {
         // Create multiple threads to access the singleton instance concurrently
         Thread t1 = new Thread(() -> {
             Academie a1 = Academie.getInstance();
@@ -44,5 +48,11 @@ class AcademieTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    @ExtendWith(MockitoExtension.class)
+    void nullCheckOnAdaugaCursTest() {
+
     }
 }

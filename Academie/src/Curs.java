@@ -1,3 +1,7 @@
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+
 public abstract class Curs {
     private int id;
     private String nume;
@@ -41,4 +45,9 @@ public abstract class Curs {
                 ", pret=" + pret +
                 '}';
     }
+
+    void method(Object... obj){
+
+    }
 }
+
