@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Academie {
-
-    private static Academie instance;
     private List<Curs> cursuri;
     int idCounter = 1;
 
+    //Bill Pugh singleton implementation
     private Academie(){}
 
-    public static synchronized Academie getInstance(){
-        if (instance == null){
-            instance = new Academie();
-        }
-        return instance;
+    private static class AcademieSingleton{
+        private static final Academie instance = new Academie();
+    }
+
+    public static Academie getInstance(){
+        return AcademieSingleton.instance;
     }
 
     public void adaugaCurs(String[] data){
