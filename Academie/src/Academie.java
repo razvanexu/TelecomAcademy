@@ -19,29 +19,26 @@ public class Academie {
     }
 
     public void adaugaCurs(String[] data){
-        try {
-            if (cursuri == null){
-                cursuri = new ArrayList<>();
-            }
-            if (cursuri.size() == 30){
-                throw new PreaMulteCursuriException();
-            }else {
-                try{
-                    if (data[0].equals("Programare") || data[0].equals("programare")){
-                    cursuri.add(new Programare(idCounter++, data[1].trim(), Double.parseDouble(data[2].trim())));
-                } else if (data[0].equals("Limbi Straine") || data[0].equals("limbi straine")) {
-                    cursuri.add(new LimbiStraine(idCounter++, data[0].trim(), Double.parseDouble(data[2].trim())));
-                }else{
-                    System.out.println("Cursul nu exista");
-                }
-                    System.out.println("Cursul " + data[1] + " a fost adaugat");
-                }catch (Exception e){
-                    System.out.println("Introduceti datele corect [Enter]");
-                }
-            }
-        }catch (PreaMulteCursuriException ex){
-            System.out.println(ex.getMessage());
-        }
+       if (cursuri == null){
+           cursuri = new ArrayList<>();
+       }
+       if (cursuri.size() >= 30){
+           throw new PreaMulteCursuriException();
+       }else {
+           try{
+               if (data[0].equalsIgnoreCase("programare")){
+               cursuri.add(new Programare(idCounter++, data[1].trim(), Double.parseDouble(data[2].trim())));
+                   System.out.println("Cursul " + data[1] + " a fost adaugat");
+           } else if (data[0].equalsIgnoreCase("limbi straine")) {
+               cursuri.add(new LimbiStraine(idCounter++, data[0].trim(), Double.parseDouble(data[2].trim())));
+                   System.out.println("Cursul " + data[1] + " a fost adaugat");
+           }else{
+               System.out.println("Cursul nu exista");
+           }
+           }catch (Exception e){
+               System.out.println("Introduceti datele corect [Enter]");
+           }
+       }
     }
 
     public void stergeCurs(int id){
@@ -77,5 +74,13 @@ public class Academie {
         }catch (NullPointerException ex){
             System.out.println("Lista e goala sau nu exista");
         }
+    }
+
+    public List<Curs> getCursuri() {
+        return cursuri;
+    }
+
+    public void reset() {
+        cursuri = new ArrayList<>();
     }
 }

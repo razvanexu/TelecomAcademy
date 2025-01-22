@@ -14,9 +14,13 @@ public class Start {
                     exit = true;
                     break;
                 case "1":
-                    System.out.println("Introduceti <tip>,<nume>,<pret>");
-                    String[] inputs = sc.nextLine().split(",");
-                    ubb.adaugaCurs(inputs);
+                    try {
+                        System.out.println("Introduceti <tip>,<nume>,<pret>");
+                        String[] inputs = sc.nextLine().split(",");
+                        ubb.adaugaCurs(inputs);
+                    }catch (Exception ex){
+                        System.out.println(ex.getMessage());
+                    }
                     System.out.println(menu);
                     break;
                 case "2":

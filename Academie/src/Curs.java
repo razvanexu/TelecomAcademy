@@ -1,6 +1,3 @@
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
 
 public abstract class Curs {
     private int id;
@@ -17,26 +14,6 @@ public abstract class Curs {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNume() {
-        return nume;
-    }
-
-    public void setNume(String nume) {
-        this.nume = nume;
-    }
-
-    public double getPret() {
-        return pret;
-    }
-
-    public void setPret(double pret) {
-        this.pret = pret;
-    }
-
     @Override
     public String toString() {
         return "Curs{" +
@@ -44,10 +21,6 @@ public abstract class Curs {
                 ", nume='" + nume + '\'' +
                 ", pret=" + pret +
                 '}';
-    }
-
-    void method(Object... obj){
-
     }
 }
 
