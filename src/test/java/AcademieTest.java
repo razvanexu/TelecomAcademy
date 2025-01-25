@@ -1,4 +1,5 @@
 import Exceptions.PreaMulteCursuriException;
+import domain.Academie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +64,6 @@ class AcademieTest {
         cursuri.reset();
     }
 
-
     @Test
     void testAdaugaCurs_ValidProgramare() {
         //Given
@@ -83,9 +83,30 @@ class AcademieTest {
 
     @Test
     void testAdaugaCurs_InvalidCourseType() {
+        //Given
         String[] data = {"Mathematics", "Algebra Course", "150.0"};
-        cursuri.adaugaCurs(data);
-        assertEquals(0, cursuri.getCursuri().size()); // No course should be added
+        //When
+        Exception ex = assertThrows(IllegalArgumentException.class,
+                () -> cursuri.adaugaCurs(data));
+        //Then
+        assertAll(
+            () -> assertEquals(0, cursuri.getCursuri().size()), // No course should be added);
+            () -> assertEquals("Tip curs indispoibil", ex.getMessage())
+        );
+    }
+
+    @Test
+    void testAdaugaCurs_InvalidPriceType() {
+        //Given
+        String[] data = {"Programare", "Algebra Course", "invalid price"};
+        //When
+        Exception ex = assertThrows(NumberFormatException.class,
+                () -> cursuri.adaugaCurs(data));
+        //Then
+        assertAll(
+            () -> assertEquals(0, cursuri.getCursuri().size()), // No course should be added);
+            () -> assertEquals("For input string: \"invalid price\"", ex.getMessage())
+        );
     }
 
     @Test
@@ -102,12 +123,5 @@ class AcademieTest {
         });
         //Then
         assertEquals("Nu mai sunt locuri disponibile", exception.getMessage()); // Adjust the message accordingly
-    }
-
-    @Test
-    void testAdaugaCurs_InvalidDataFormat() {
-        String[] data = {"Programare", "Python Course", "invalid_number"};
-        cursuri.adaugaCurs(data);
-        assertEquals(0, cursuri.getCursuri().size()); // No course should be added
     }
 }

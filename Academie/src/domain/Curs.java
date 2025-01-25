@@ -1,3 +1,4 @@
+package domain;
 
 public abstract class Curs {
     private int id;
@@ -16,7 +17,7 @@ public abstract class Curs {
 
     @Override
     public String toString() {
-        return "Curs{" +
+        return "domain.Curs{" +
                 "id=" + id +
                 ", nume='" + nume + '\'' +
                 ", pret=" + pret +
